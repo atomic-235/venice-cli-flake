@@ -29,6 +29,9 @@ pub fn plain(text: &str) -> String {
         .replace("&gt;", ">")
         .replace("&quot;", "\"")
         .replace("&#39;", "'")
+        .replace("&#x27;", "'")
+        .replace("&#x2F;", "/")
+        .replace("&nbsp;", " ")
         .trim()
         .to_string()
 }

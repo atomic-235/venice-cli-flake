@@ -596,7 +596,7 @@ impl DashApp {
     fn draw(&self, frame: &mut ratatui::Frame, visible: &[usize]) {
         let area = frame.area();
         let chunks = Layout::vertical([
-            Constraint::Length(2),
+            Constraint::Length(3),
             Constraint::Min(5),
             Constraint::Length(if self.detail { 10 } else { 0 }),
             Constraint::Length(1),
@@ -623,10 +623,10 @@ impl DashApp {
             chunks[0],
         );
 
-        let keys = price_keys(&self.rows);
+        let keys: Vec<String> = price_keys(&self.rows).into_iter().take(4).collect();
         let mut headers: Vec<String> = vec!["Model".into(), "Type".into(), "Vendor".into()];
         let mut constraints = vec![
-            Constraint::Length(34),
+            Constraint::Length(40),
             Constraint::Length(8),
             Constraint::Length(12),
         ];
@@ -642,12 +642,12 @@ impl DashApp {
                 format!("{key} {unit}")
             };
             headers.push(label);
-            constraints.push(Constraint::Length(12));
+            constraints.push(Constraint::Length(10));
         }
         headers.push("Ctx".into());
         headers.push("Tags".into());
         constraints.push(Constraint::Length(6));
-        constraints.push(Constraint::Length(24));
+        constraints.push(Constraint::Length(18));
 
         let rows: Vec<TuiRow> = visible
             .iter()
