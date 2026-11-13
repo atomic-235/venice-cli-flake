@@ -20,6 +20,7 @@
         in
         rec {
           default = pkgs.callPackage ./package.nix { };
+          static = pkgs.callPackage ./static.nix { };
           venice = default;
         }
       );
